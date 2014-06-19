@@ -4,6 +4,35 @@ SwipeFinish
 An android library. Swipe to finish Activity.
 
 ##Quick Start
+##Application
+```
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.johnliu.swipefinish.sample"
+    android:versionCode="1"
+    android:versionName="1.0.0" >
+    
+    ...
+    
+    <application
+        android:allowBackup="true" ... >
+      	...
+        <activity
+            android:name=".CommonActivity"
+            android:theme="@style/Theme.Transparent" >
+        </activity>
+    </application>
+
+</manifest>
+```
+##Style
+```
+<style name="Theme.Transparent" parent="AppTheme">
+     <item name="android:windowBackground">@android:color/transparent</item>
+     <item name="android:colorBackgroundCacheHint">@null</item>
+     <item name="android:windowIsTranslucent">true</item>
+</style>
+```
 ###Common Activity.
 ```
 public class CommonActivity extends SwipeFinishActivity {
