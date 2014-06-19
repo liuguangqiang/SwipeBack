@@ -8,6 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
+/**
+ * SwipeFinishActivity.
+ * <p>
+ * Base activity for swiping to finish activity.
+ * 
+ * Created by John on 2014-6-19
+ */
 public class SwipeFinishActivity extends FragmentActivity {
 
 	SwipeFinishLayout swipeLayout;
