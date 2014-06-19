@@ -4,7 +4,7 @@ SwipeFinish
 An android library. Swipe to finish Activity.
 
 ##Quick Start
-##Application
+###Application
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -25,7 +25,7 @@ An android library. Swipe to finish Activity.
 
 </manifest>
 ```
-##Style
+###Style
 ```
 <style name="Theme.Transparent" parent="AppTheme">
      <item name="android:windowBackground">@android:color/transparent</item>
