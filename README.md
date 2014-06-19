@@ -1,7 +1,7 @@
 SwipeFinish
 ===========
 
-A android library. Swipe to finish Activity.
+An android library. Swipe to finish Activity.
 
 ##Quick Start
 ###Common Activity.
@@ -16,7 +16,7 @@ public class CommonActivity extends SwipeFinishActivity {
 	
 }
 ```
-###With a ViewPager
+###With a ViewPager.
 ```
 public class ViewPagerActivity extends SwipeFinishActivity {
 
