@@ -1,7 +1,7 @@
 SwipeFinish
 ===========
 
-A small android library for swiping to finish activity.
+A small android library for swiping to finish activity. Have a Test.
 
 ##Quick Start
 ###Application
