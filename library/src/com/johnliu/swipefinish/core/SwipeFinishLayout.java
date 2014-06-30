@@ -101,12 +101,7 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
         // get the root view of Activity
         mActivity = act;
         root = (ViewGroup) act.getWindow().getDecorView();
-        Display dis = act.getWindowManager().getDefaultDisplay();
-        Point outSize = new Point(0, 0);
-        dis.getSize(outSize);
-        if (outSize != null) {
-            addShadow(outSize.y);
-        }
+        addShadow();
     }
 
     /**
@@ -114,10 +109,13 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
      * 
      * @param height
      */
-    private void addShadow(int height) {
+    private void addShadow() {
+        Display dis = mActivity.getWindowManager().getDefaultDisplay();
+        Point outSize = new Point(0, 0);
+        dis.getSize(outSize);
         ivShadow = new ImageView(getContext());
         ivShadow.setBackgroundResource(R.drawable.shadow_left);
-        FrameLayout.LayoutParams params = new LayoutParams(40, height);
+        FrameLayout.LayoutParams params = new LayoutParams(40, outSize.y);
         params.leftMargin = -40;
         root.addView(ivShadow, params);
     }
