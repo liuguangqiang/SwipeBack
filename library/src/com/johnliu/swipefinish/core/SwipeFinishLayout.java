@@ -2,17 +2,19 @@ package com.johnliu.swipefinish.core;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
+import android.graphics.Point;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Scroller;
 
 import com.johnliu.swipefinish.R;
@@ -45,8 +47,6 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
     private float lastX = 0;
 
     private float lastY;
-
-    private View root;
 
     private Scroller mScroller;
 
@@ -91,26 +91,31 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
         mScaledTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
     }
 
+    ViewGroup root;
+
     public void init(Activity act) {
         // get the root view of Activity
         mActivity = act;
-        root = (View) act.getWindow().getDecorView();
+        root = (ViewGroup) act.getWindow().getDecorView();
+        Display dis = act.getWindowManager().getDefaultDisplay();
+        Point outSize = new Point(0, 0);
+        dis.getSize(outSize);
+        if (outSize != null) {
+            drawShadow(outSize.y);
+        }
     }
 
-    private Drawable myShadow;
-
-    @Override
-    protected void dispatchDraw(Canvas canvas) {
-        super.dispatchDraw(canvas);
-        if (root != null) {
-            if (myShadow == null) myShadow = getResources().getDrawable(R.drawable.shadow_left);
-            int left = -10;
-            int right = -20;
-            int top = root.getTop();
-            int bottom = root.getBottom();
-            myShadow.setBounds(left, top, right, bottom);
-            myShadow.draw(canvas);
-        }
+    /**
+     * Draw a shadow for layout.
+     * 
+     * @param height
+     */
+    private void drawShadow(int height) {
+        ImageView iv = new ImageView(getContext());
+        iv.setBackgroundResource(R.drawable.shadow_left);
+        FrameLayout.LayoutParams params = new LayoutParams(50, height);
+        params.leftMargin = -50;
+        root.addView(iv, params);
     }
 
     /**
