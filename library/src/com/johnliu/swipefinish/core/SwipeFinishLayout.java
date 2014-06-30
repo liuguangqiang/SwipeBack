@@ -30,12 +30,14 @@ import com.johnliu.swipefinish.R;
  */
 public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
 
-    private static final String TAG = "SwipeFinish";
+    private final String TAG = "SwipeFinish";
+
+    private final int DURATION = 300;
 
     /**
      * If the speed of moving Activity is more than MIN_SPEED,then finish the Activity.
      */
-    private static final int MIN_SPEED = 500;
+    private final int MIN_SPEED = 500;
 
     /**
      * The speed of moving at the horizontal direction.
@@ -58,6 +60,8 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
     private VelocityTracker mVelocityTracker = null;
 
     private ViewPager mViewPager;
+
+    private ImageView ivShadow;
 
     /**
      * Distance in pixels a touch can wander before we think the user is scrolling.
@@ -101,21 +105,21 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
         Point outSize = new Point(0, 0);
         dis.getSize(outSize);
         if (outSize != null) {
-            drawShadow(outSize.y);
+            addShadow(outSize.y);
         }
     }
 
     /**
-     * Draw a shadow for layout.
+     * Add a shadow for layout.
      * 
      * @param height
      */
-    private void drawShadow(int height) {
-        ImageView iv = new ImageView(getContext());
-        iv.setBackgroundResource(R.drawable.shadow_left);
-        FrameLayout.LayoutParams params = new LayoutParams(50, height);
-        params.leftMargin = -50;
-        root.addView(iv, params);
+    private void addShadow(int height) {
+        ivShadow = new ImageView(getContext());
+        ivShadow.setBackgroundResource(R.drawable.shadow_left);
+        FrameLayout.LayoutParams params = new LayoutParams(40, height);
+        params.leftMargin = -40;
+        root.addView(ivShadow, params);
     }
 
     /**
@@ -135,9 +139,9 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (mViewPager != null && mViewPager.getCurrentItem() != 0) {
-                    // If the ViewPager isn't selected the first item .
-                    // Return false.Then all events will passed to the ViewPager
-                    // continue.
+                    // If the ViewPager isn't selected the first item.
+                    // Return false.
+                    // Then all events will passed to the ViewPager continue.
                     return false;
                 }
                 downX = event.getRawX();
@@ -150,8 +154,8 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
                 float deltaY = event.getRawY() - lastY;
                 deltaY = Math.abs(deltaY);
                 if (deltaX > mScaledTouchSlop && deltaY < mScaledTouchSlop) {
-                    // Return true. Then all events will passed to the method
-                    // "onTouch".
+                    // Return true.
+                    // Then all events will passed to the method "onTouch".
                     return true;
                 }
                 break;
@@ -221,7 +225,7 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
     private void scrollToFinish() {
         isFinish = true;
         final int delta = (getWidth() + root.getScrollX());
-        mScroller.startScroll(root.getScrollX(), 0, -delta + 1, 0, Math.abs(delta));
+        mScroller.startScroll(root.getScrollX(), 0, -delta + 1, 0, DURATION);
         postInvalidate();
     }
 
@@ -231,15 +235,14 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
     private void scrollToOrigin() {
         isFinish = false;
         final int delta = root.getScrollX();
-        mScroller.startScroll(root.getScrollX(), 0, -delta, 0, Math.abs(delta));
+        mScroller.startScroll(root.getScrollX(), 0, -delta, 0, DURATION);
         postInvalidate();
     }
 
     @Override
     public void computeScroll() {
         /*
-         * When call Scroller.startScroll, the method "Scroller.computeScrollOffset()" will return
-         * true.
+         * When call Scroller.startScroll, the method "computeScrollOffset()" will return true.
          */
         if (mScroller.computeScrollOffset()) {
             root.scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
@@ -247,6 +250,8 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
             if (mScroller.isFinished() && isFinish) {
                 mActivity.finish();
             }
+
+
         }
     }
 
