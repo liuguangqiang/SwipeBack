@@ -32,7 +32,9 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
 
     private final String TAG = "SwipeFinish";
 
-    private final int DURATION = 300;
+    private ViewGroup root;
+
+    private final int DURATION = 400;
 
     /**
      * If the speed of moving Activity is more than MIN_SPEED,then finish the Activity.
@@ -95,7 +97,6 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
         mScaledTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
     }
 
-    ViewGroup root;
 
     public void init(Activity act) {
         // get the root view of Activity
@@ -244,6 +245,9 @@ public class SwipeFinishLayout extends FrameLayout implements OnTouchListener {
          */
         if (mScroller.computeScrollOffset()) {
             root.scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+            System.out.println("mScroller.getFinalX():" + mScroller.getFinalX());
+            System.out.println("mScroller.getCurrX():" + mScroller.getCurrX());
+            System.out.println("mScroller.isFinished():" + mScroller.isFinished());
             postInvalidate();
             if (mScroller.isFinished() && isFinish) {
                 mActivity.finish();
