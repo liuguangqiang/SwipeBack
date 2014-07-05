@@ -3,6 +3,9 @@ SwipeFinish
 
 A small android library for swiping to finish activity. 
 
+##Screenshots
+![image](Images/swipe_finish.gif)
+
 ##Quick Start
 ###Application
 ```
