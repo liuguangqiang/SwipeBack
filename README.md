@@ -6,6 +6,8 @@ A small android library for swiping to finish activity.
 ##Screenshots
 ![image](Images/swipe_finish.gif)
 
+<embed src="Images/swipe.avi" type="application/x-shockwave-flash" width="640" height="960" wmode="transparent"></embed>
+
 ##Quick Start
 ###Application
 ```
