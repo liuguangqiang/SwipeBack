@@ -29,3 +29,15 @@ proguard/
 
 #OSX
 .DS_Store
+
+#Android Studio
+build/
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+#gradle
+.gradle/
