@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.ScrollView;
 
 /**
  * Swipe or Pull to finish a Activity.
@@ -35,7 +36,7 @@ public class SwipeBackLayout extends ViewGroup {
 
     }
 
-    private DragEdge dragEdge = DragEdge.LEFT;
+    private DragEdge dragEdge = DragEdge.TOP;
 
     public static int BACK_FACTOR = 3;
 
@@ -46,6 +47,10 @@ public class SwipeBackLayout extends ViewGroup {
     private View target;
 
     private View scrollChild;
+
+    public void setScrollChild(View view) {
+        scrollChild = view;
+    }
 
     private int verticalDragRange = 0;
 
@@ -107,7 +112,32 @@ public class SwipeBackLayout extends ViewGroup {
             target = getChildAt(0);
 
             if (scrollChild == null && target != null) {
-                scrollChild = target;
+                if (target instanceof ViewGroup) {
+                    findScrollView((ViewGroup) target);
+                } else {
+                    scrollChild = target;
+                }
+
+            }
+        }
+    }
+
+    /**
+     * Find out the scrollable child view from a ViewGroup.
+     *
+     * @param viewGroup
+     */
+    private void findScrollView(ViewGroup viewGroup) {
+        scrollChild = viewGroup;
+        if (viewGroup.getChildCount() > 0) {
+            int count = viewGroup.getChildCount();
+            View child;
+            for (int i = 0; i < count; i++) {
+                child = viewGroup.getChildAt(i);
+                if (child instanceof AbsListView || child instanceof ScrollView) {
+                    scrollChild = child;
+                    return;
+                }
             }
         }
     }
@@ -192,18 +222,9 @@ public class SwipeBackLayout extends ViewGroup {
     }
 
     public boolean canChildScrollUp() {
-        if (android.os.Build.VERSION.SDK_INT < 14) {
-            if (scrollChild instanceof AbsListView) {
-                final AbsListView absListView = (AbsListView) scrollChild;
-                return absListView.getChildCount() > 0
-                        && (absListView.getFirstVisiblePosition() > 0 || absListView.getChildAt(0)
-                        .getTop() < absListView.getPaddingTop());
-            } else {
-                return scrollChild.getScrollY() > 0;
-            }
-        } else {
-            return ViewCompat.canScrollVertically(scrollChild, -1);
-        }
+//        if(scrollChild instanceof ViewGroup)
+
+        return ViewCompat.canScrollVertically(scrollChild, -1);
     }
 
     public boolean canChildScrollDown() {
