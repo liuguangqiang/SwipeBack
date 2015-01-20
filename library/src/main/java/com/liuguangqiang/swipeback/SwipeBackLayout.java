@@ -12,13 +12,15 @@ import android.widget.AbsListView;
 
 /**
  * Swipe or Pull to finish a Activity.
- * <p>This layout must be a root layout and contains only one direct child view.</p>
+ * <p/>
+ * This layout must be a root layout and contains only one direct child view.
  * <p/>
  * The activity must use a theme that with translucent style.
  * <style name="Theme.Swipe.Back" parent="AppTheme">
  * <item name="android:windowIsTranslucent">true</item>
  * <item name="android:windowBackground">@android:color/transparent</item>
  * </style>
+ * <p/>
  * Created by Eric on 15/1/8.
  */
 public class SwipeBackLayout extends ViewGroup {
@@ -295,10 +297,14 @@ public class SwipeBackLayout extends ViewGroup {
                 draggingOffset = Math.abs(left);
 
             //滑动距离到退出锚点的比例。
-            float fraction = (float) draggingOffset / (float) finishAnchor;
-            if (fraction >= 1) fraction = 1;
+            float fractionAnchor = (float) draggingOffset / (float) finishAnchor;
+            if (fractionAnchor >= 1) fractionAnchor = 1;
+
+            float fractionScreen = (float) draggingOffset / (float) getDragRange();
+            if (fractionScreen >= 1) fractionScreen = 1;
+
             if (swipeBackListener != null) {
-                swipeBackListener.onReveal(fraction);
+                swipeBackListener.onViewPositionChanged(fractionAnchor, fractionScreen);
             }
         }
 
@@ -356,7 +362,13 @@ public class SwipeBackLayout extends ViewGroup {
 
     public interface SwipeBackListener {
 
-        public void onReveal(float fraction);
+        /**
+         * Return scrolled fraction of the layout.
+         *
+         * @param fractionAnchor relative to finished anchor.
+         * @param fractionScreen relative to the screen.
+         */
+        public void onViewPositionChanged(float fractionAnchor, float fractionScreen);
 
     }
 
