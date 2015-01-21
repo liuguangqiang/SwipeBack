@@ -1,14 +1,17 @@
 apply plugin: 'com.android.library'
+apply from: 'https://raw.github.com/liuguangqiang/gradle-mvn-push/master/gradle-mvn-push.gradle'
 
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
 
+    lintOptions {
+        abortOnError false
+    }
+
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
     }
     buildTypes {
         release {

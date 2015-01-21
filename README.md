@@ -11,7 +11,25 @@ You can set the swipe direction,such as left or top.
 
 ##Usage
 
-###Layout
+###Gradle
+```
+dependencies {
+   	compile 'com.github.liuguangqiang.swipeback:library:0.1.1@aar'
+}
+```
+
+###Maven
+```
+<dependency>
+  	<groupId>com.github.liuguangqiang.swipeback</groupId>
+  	<artifactId>library</artifactId>
+  	<version>0.1.0</version>
+  	<type>aar</type>
+</dependency>
+```
+###Layout and activity theme.
+SwipeBackLayout must contains only one direct child.
+
 ```
 <com.liuguangqiang.swipeback.SwipeBackLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,7 +42,6 @@ You can set the swipe direction,such as left or top.
 </com.liuguangqiang.swipeback.SwipeBackLayout>
 ```
 
-###Theme
 ```
  <style name="Theme.Swipe.Back" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowIsTranslucent">true</item>
