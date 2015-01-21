@@ -38,6 +38,10 @@ public class SwipeBackLayout extends ViewGroup {
 
     private DragEdge dragEdge = DragEdge.TOP;
 
+    public void setDragEdge(DragEdge dragEdge) {
+        this.dragEdge = dragEdge;
+    }
+
     public static int BACK_FACTOR = 3;
 
     private static final double AUTO_FINISHED_SPEED_LIMIT = 2000.0;

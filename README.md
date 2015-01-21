@@ -1,92 +1,48 @@
-SwipeFinish
+SwipeBack
 ===========
 
-A small android library for swiping to finish activity. 
+SwipeBack is a android library that can finish a activity by using gesture.
+
+You can set the swipe direction,such as left or top.
 
 ##Screenshots
-![image](Images/swipe_finish.gif)
+![image](Images/swipeback.gif)
 
-<embed src="Images/swipe.avi" type="application/x-shockwave-flash" width="640" height="960" wmode="transparent"></embed>
 
-##Quick Start
-###Application
-```
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.johnliu.swipefinish.sample"
-    android:versionCode="1"
-    android:versionName="1.0.0" >
-    
-    ...
-    
-    <application
-        android:allowBackup="true" ... >
-      	...
-        <activity
-            android:name=".CommonActivity"
-            android:theme="@style/Theme.Transparent" >
-        </activity>
-    </application>
+##Usage
 
-</manifest>
+###Layout
 ```
-###Style
-```
-<style name="Theme.Transparent" parent="AppTheme">
-     <item name="android:windowBackground">@android:color/transparent</item>
-     <item name="android:colorBackgroundCacheHint">@null</item>
-     <item name="android:windowIsTranslucent">true</item>
-</style>
-```
-###Common Activity.
-```
-public class CommonActivity extends SwipeFinishActivity {
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_common);
-	}
+<com.liuguangqiang.swipeback.SwipeBackLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipeBackLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 	
-}
+	<!-- SwipeBackLayout must contains only one direct child -->
+
+</com.liuguangqiang.swipeback.SwipeBackLayout>
 ```
-###With a ViewPager.
+
+###Theme
 ```
-public class ViewPagerActivity extends SwipeFinishActivity {
+ <style name="Theme.Swipe.Back" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+ </style>
+```
 
-	private ViewPager viewPager;
+###Swipe Direction
+You can set  DragEdge to change the swipe direction.
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_viewpager);
-		initView();
-	}
+```
+ public enum DragEdge {
 
-	private void initView() {
-		SimplePagerAdapter adapter = new SimplePagerAdapter(
-				getSupportFragmentManager());
-		viewPager = (ViewPager) this.findViewById(R.id.view_pager);
-		viewPager.setAdapter(adapter);
-		interceptViewPager(viewPager);
-	}
+        TOP,
 
-	private class SimplePagerAdapter extends FragmentPagerAdapter {
+        LEFT
 
-		public SimplePagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int arg0) {
-			return new TestFragment();
-		}
-
-		@Override
-		public int getCount() {
-			return 4;
-		}
-	}
-
-}
+    }
 ```
