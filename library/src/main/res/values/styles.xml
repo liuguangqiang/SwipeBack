@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="Theme.Swipe.Back" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.Swipe.Back" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="windowActionBar">false</item>

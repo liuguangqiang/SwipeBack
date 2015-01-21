@@ -8,11 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-
-
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     private Button btnCommon;
+    private Button btnListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +49,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.btn_common:
                 skipActivity(CommonActivity.class);
                 break;
+            case R.id.btn_ListView:
+                skipActivity(ListViewActivity.class);
+                break;
         }
     }
 
     private void initViews() {
         btnCommon = (Button) findViewById(R.id.btn_common);
         btnCommon.setOnClickListener(this);
+
+        btnListView = (Button) findViewById(R.id.btn_ListView);
+        btnListView.setOnClickListener(this);
     }
 
     private void skipActivity(Class<?> classOf) {

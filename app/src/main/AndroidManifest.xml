@@ -19,6 +19,10 @@
         <activity
             android:name=".CommonActivity"
             android:label="@string/title_activity_common"
+            android:theme="@style/Theme.Swipe.Back" />
+        <activity
+            android:name=".ListViewActivity"
+            android:label="@string/title_activity_list_view"
             android:theme="@style/Theme.Swipe.Back"></activity>
     </application>
 
