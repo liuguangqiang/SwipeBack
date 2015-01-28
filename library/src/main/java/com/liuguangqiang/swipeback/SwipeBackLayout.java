@@ -29,11 +29,13 @@ public class SwipeBackLayout extends ViewGroup {
     private static final String TAG = "SwipeBackLayout";
 
     public enum DragEdge {
+        LEFT,
 
         TOP,
 
-        LEFT
+        RIGHT,
 
+        BOTTOM
     }
 
     private DragEdge dragEdge = DragEdge.TOP;
@@ -182,18 +184,26 @@ public class SwipeBackLayout extends ViewGroup {
         super.onSizeChanged(w, h, oldw, oldh);
         verticalDragRange = h;
         horizontalDragRange = w;
-        if (dragEdge == DragEdge.TOP) {
-            finishAnchor = verticalDragRange / BACK_FACTOR;
-        } else if (dragEdge == DragEdge.LEFT) {
-            finishAnchor = horizontalDragRange / BACK_FACTOR;
+
+        switch (dragEdge) {
+            case TOP:
+            case BOTTOM:
+                finishAnchor = verticalDragRange / BACK_FACTOR;
+                break;
+            case LEFT:
+            case RIGHT:
+                finishAnchor = horizontalDragRange / BACK_FACTOR;
+                break;
         }
     }
 
     private int getDragRange() {
         switch (dragEdge) {
             case TOP:
+            case BOTTOM:
                 return verticalDragRange;
             case LEFT:
+            case RIGHT:
                 return horizontalDragRange;
             default:
                 return verticalDragRange;
@@ -226,21 +236,19 @@ public class SwipeBackLayout extends ViewGroup {
     }
 
     public boolean canChildScrollUp() {
-//        if(scrollChild instanceof ViewGroup)
-
         return ViewCompat.canScrollVertically(scrollChild, -1);
     }
 
     public boolean canChildScrollDown() {
-        if (android.os.Build.VERSION.SDK_INT < 14) {
-            return ViewCompat.canScrollVertically(scrollChild, 1);
-        } else {
-            return ViewCompat.canScrollVertically(scrollChild, 1);
-        }
+        return ViewCompat.canScrollVertically(scrollChild, 1);
     }
 
     private boolean canChildScrollRight() {
         return ViewCompat.canScrollHorizontally(scrollChild, -1);
+    }
+
+    private boolean canChildScrollLeft() {
+        return ViewCompat.canScrollHorizontally(scrollChild, 1);
     }
 
     private void finish() {
@@ -289,6 +297,10 @@ public class SwipeBackLayout extends ViewGroup {
                 final int leftBound = getPaddingLeft();
                 final int rightBound = horizontalDragRange;
                 result = Math.min(Math.max(left, leftBound), rightBound);
+            } else if (dragEdge == DragEdge.RIGHT && left < 0) {
+                final int leftBound = -horizontalDragRange;
+                final int rightBound = getPaddingLeft();
+                result = Math.min(Math.max(left, leftBound), rightBound);
             }
 
             return result;
@@ -316,10 +328,25 @@ public class SwipeBackLayout extends ViewGroup {
             boolean verticalDraging = Math.abs(top) > Math.abs(left);
             boolean horizontalDraging = Math.abs(left) > Math.abs(top);
 
-            if (dragEdge == DragEdge.TOP && verticalDraging)
-                draggingOffset = Math.abs(top);
-            else if (dragEdge == DragEdge.LEFT && horizontalDraging)
-                draggingOffset = Math.abs(left);
+//            if (dragEdge == DragEdge.TOP && verticalDraging)
+//                draggingOffset = Math.abs(top);
+//            else if (dragEdge == DragEdge.LEFT && horizontalDraging)
+//                draggingOffset = Math.abs(left);
+
+            switch (dragEdge) {
+                case TOP:
+                case BOTTOM:
+                    if (verticalDraging)
+                        draggingOffset = Math.abs(top);
+                    break;
+                case LEFT:
+                case RIGHT:
+                    if (horizontalDraging)
+                        draggingOffset = Math.abs(left);
+                    break;
+                default:
+                    break;
+            }
 
             //滑动距离到退出锚点的比例。
             float fractionAnchor = (float) draggingOffset / (float) finishAnchor;
@@ -349,13 +376,25 @@ public class SwipeBackLayout extends ViewGroup {
                 isBack = false;
             }
 
-            if (dragEdge == DragEdge.TOP) {
-                int finalTop = isBack ? verticalDragRange : 0;
-                smoothScrollToY(finalTop);
-            } else if (dragEdge == DragEdge.LEFT) {
-                int finalLeft = isBack ? horizontalDragRange : 0;
-                smoothScrollToX(finalLeft);
+            int finalLeft;
+            int finalTop;
+            switch (dragEdge) {
+                case LEFT:
+                    finalLeft = isBack ? horizontalDragRange : 0;
+                    smoothScrollToX(finalLeft);
+                    break;
+                case RIGHT:
+                    finalLeft = isBack ? -horizontalDragRange : 0;
+                    smoothScrollToX(finalLeft);
+                    break;
+                case TOP:
+                    finalTop = isBack ? verticalDragRange : 0;
+                    smoothScrollToY(finalTop);
+                    break;
+                case BOTTOM:
+                    break;
             }
+
         }
     }
 
