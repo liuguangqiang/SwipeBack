@@ -283,6 +283,10 @@ public class SwipeBackLayout extends ViewGroup {
                 final int topBound = getPaddingTop();
                 final int bottomBound = verticalDragRange;
                 result = Math.min(Math.max(top, topBound), bottomBound);
+            } else if (dragEdge == DragEdge.BOTTOM && !canChildScrollDown() && top < 0) {
+                final int topBound = -verticalDragRange;
+                final int bottomBound = getPaddingTop();
+                result = Math.min(Math.max(top, topBound), bottomBound);
             }
 
             return result;
@@ -327,11 +331,6 @@ public class SwipeBackLayout extends ViewGroup {
 
             boolean verticalDraging = Math.abs(top) > Math.abs(left);
             boolean horizontalDraging = Math.abs(left) > Math.abs(top);
-
-//            if (dragEdge == DragEdge.TOP && verticalDraging)
-//                draggingOffset = Math.abs(top);
-//            else if (dragEdge == DragEdge.LEFT && horizontalDraging)
-//                draggingOffset = Math.abs(left);
 
             switch (dragEdge) {
                 case TOP:
@@ -392,6 +391,8 @@ public class SwipeBackLayout extends ViewGroup {
                     smoothScrollToY(finalTop);
                     break;
                 case BOTTOM:
+                    finalTop = isBack ? -verticalDragRange : 0;
+                    smoothScrollToY(finalTop);
                     break;
             }
 
