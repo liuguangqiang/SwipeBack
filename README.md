@@ -6,6 +6,8 @@ SwipeBack is a android library that can finish a activity by using gesture.
 You can set the swipe direction,such as left,top,right and bottom.
 
 ##Screenshots
+![image](Images/swipeback_demo.gif)
+
 ![image](Images/swipeback.gif)
 
 
