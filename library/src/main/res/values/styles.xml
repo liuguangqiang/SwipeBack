@@ -7,4 +7,11 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+
+    <style name="Theme.No.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+
 </resources>

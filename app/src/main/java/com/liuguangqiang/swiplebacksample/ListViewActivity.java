@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 public class ListViewActivity extends ActionBarActivity {
 
     private ListView lv;
@@ -50,7 +49,7 @@ public class ListViewActivity extends ActionBarActivity {
 
     private void initView() {
         swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
-        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.BOTTOM);
+        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.TOP);
 
         SimpleAdapter adapter = new SimpleAdapter(getApplicationContext(),
                 data, R.layout.item_test, new String[]{"title"},

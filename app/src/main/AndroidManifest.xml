@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".DemoActivity"
+            android:theme="@style/Theme.No.ActionBar" />
         <activity
             android:name=".CommonActivity"
             android:label="@string/title_activity_common"

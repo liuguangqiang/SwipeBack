@@ -335,12 +335,12 @@ public class SwipeBackLayout extends ViewGroup {
             switch (dragEdge) {
                 case TOP:
                 case BOTTOM:
-                    if (verticalDraging)
+//                    if (verticalDraging)
                         draggingOffset = Math.abs(top);
                     break;
                 case LEFT:
                 case RIGHT:
-                    if (horizontalDraging)
+//                    if (horizontalDraging)
                         draggingOffset = Math.abs(left);
                     break;
                 default:
@@ -400,17 +400,34 @@ public class SwipeBackLayout extends ViewGroup {
     }
 
     private boolean backBySpeed(float xvel, float yvel) {
-        boolean isBack = false;
-        if (dragEdge == DragEdge.TOP && Math.abs(yvel) > Math.abs(xvel)) {
-            if (yvel > AUTO_FINISHED_SPEED_LIMIT) {
-                isBack = !canChildScrollUp();
-            }
-        } else if (dragEdge == DragEdge.LEFT && Math.abs(xvel) > Math.abs(yvel)) {
-            if (xvel > AUTO_FINISHED_SPEED_LIMIT) {
-                isBack = !canChildScrollUp();
-            }
+//        boolean isBack = false;
+//        if (dragEdge == DragEdge.TOP && Math.abs(yvel) > Math.abs(xvel)) {
+//            if (yvel > AUTO_FINISHED_SPEED_LIMIT) {
+//                isBack = !canChildScrollUp();
+//            }
+//        } else if (dragEdge == DragEdge.LEFT && Math.abs(xvel) > Math.abs(yvel)) {
+//            if (xvel > AUTO_FINISHED_SPEED_LIMIT) {
+//                isBack = !canChildScrollUp();
+//            }
+//        }
+
+
+        switch (dragEdge) {
+            case TOP:
+            case BOTTOM:
+                if (Math.abs(yvel) > Math.abs(xvel) && Math.abs(yvel) > AUTO_FINISHED_SPEED_LIMIT) {
+                    return dragEdge == DragEdge.TOP ? !canChildScrollUp() : !canChildScrollDown();
+                }
+                break;
+            case LEFT:
+            case RIGHT:
+                if (Math.abs(xvel) > Math.abs(yvel) && Math.abs(xvel) > AUTO_FINISHED_SPEED_LIMIT) {
+                    return dragEdge == DragEdge.LEFT ? !canChildScrollLeft() : !canChildScrollRight();
+                }
+                break;
         }
-        return isBack;
+        return false;
+//        return isBack;
     }
 
     private void smoothScrollToX(int finalLeft) {

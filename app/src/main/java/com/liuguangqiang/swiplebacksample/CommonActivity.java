@@ -23,7 +23,7 @@ public class CommonActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
 
         layout = (SwipeBackLayout) findViewById(R.id.swipe_layout);
-        layout.setDragEdge(SwipeBackLayout.DragEdge.RIGHT);
+        layout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
     }
 
 }
