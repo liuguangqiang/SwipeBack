@@ -13,6 +13,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private Button btnCommon;
     private Button btnListView;
     private Button btnDemo;
+    private Button btnViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.btn_demo:
                 skipActivity(DemoActivity.class);
                 break;
+            case R.id.btn_viewpager:
+                skipActivity(ViewPagerActivity.class);
+                break;
         }
     }
 
@@ -68,6 +72,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         btnDemo = (Button) findViewById(R.id.btn_demo);
         btnDemo.setOnClickListener(this);
+
+        btnViewPager = (Button) findViewById(R.id.btn_viewpager);
+        btnViewPager.setOnClickListener(this);
     }
 
     private void skipActivity(Class<?> classOf) {
