@@ -3,6 +3,7 @@ package com.liuguangqiang.swipeback;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -140,7 +141,7 @@ public class SwipeBackLayout extends ViewGroup {
             View child;
             for (int i = 0; i < count; i++) {
                 child = viewGroup.getChildAt(i);
-                if (child instanceof AbsListView || child instanceof ScrollView) {
+                if (child instanceof AbsListView || child instanceof ScrollView || child instanceof ViewPager) {
                     scrollChild = child;
                     return;
                 }
@@ -297,11 +298,11 @@ public class SwipeBackLayout extends ViewGroup {
 
             int result = 0;
 
-            if (dragEdge == DragEdge.LEFT && left > 0) {
+            if (dragEdge == DragEdge.LEFT && !canChildScrollRight() && left > 0) {
                 final int leftBound = getPaddingLeft();
                 final int rightBound = horizontalDragRange;
                 result = Math.min(Math.max(left, leftBound), rightBound);
-            } else if (dragEdge == DragEdge.RIGHT && left < 0) {
+            } else if (dragEdge == DragEdge.RIGHT && !canChildScrollLeft() && left < 0) {
                 final int leftBound = -horizontalDragRange;
                 final int rightBound = getPaddingLeft();
                 result = Math.min(Math.max(left, leftBound), rightBound);
@@ -336,12 +337,12 @@ public class SwipeBackLayout extends ViewGroup {
                 case TOP:
                 case BOTTOM:
 //                    if (verticalDraging)
-                        draggingOffset = Math.abs(top);
+                    draggingOffset = Math.abs(top);
                     break;
                 case LEFT:
                 case RIGHT:
 //                    if (horizontalDraging)
-                        draggingOffset = Math.abs(left);
+                    draggingOffset = Math.abs(left);
                     break;
                 default:
                     break;
