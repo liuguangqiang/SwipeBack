@@ -10,6 +10,8 @@ You can set the swipe direction,such as left,top,right and bottom.
 
 ![image](Images/swipeback.gif)
 
+###Sample Download
+[Sample Demo](Images/apks/swipe_back_demo_v1.0.apk)
 
 ##Usage
 
@@ -67,3 +69,4 @@ You can set  DragEdge to change the swipe direction.
         BOTTOM
     }
 ```
+
