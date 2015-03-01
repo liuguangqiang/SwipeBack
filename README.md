@@ -20,7 +20,7 @@ You can set the swipe direction,such as left,top,right and bottom.
 ###Gradle
 ```
 dependencies {
-   	compile 'com.github.liuguangqiang.swipeback:library:0.1.1@aar'
+   	compile 'com.github.liuguangqiang.swipeback:library:0.3.0@aar'
 }
 ```
 
