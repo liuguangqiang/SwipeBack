@@ -11,7 +11,7 @@ You can set the swipe direction,such as left,top,right and bottom.
 ![image](Images/swipeback.gif)
 
 ###Sample Download
-[Sample Demo](Images/apks/swipe_back_demo_v1.0.apk)
+[Sample Demo](https://github.com/liuguangqiang/SwipeBack/raw/master/Images/apks/swipe_back_demo_v1.0.apk)
 
 ##Usage
 
