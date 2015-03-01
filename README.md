@@ -10,8 +10,10 @@ You can set the swipe direction,such as left,top,right and bottom.
 
 ![image](Images/swipeback.gif)
 
-###Sample Download
-[Sample Demo](https://github.com/liuguangqiang/SwipeBack/raw/master/Images/apks/swipe_back_demo_v1.0.apk)
+##Sample Download
+[Sample Download](https://github.com/liuguangqiang/SwipeBack/raw/master/Images/apks/swipe_back_demo_v1.0.apk)
+
+![image](Images/download.png)
 
 ##Usage
 
@@ -70,3 +72,14 @@ You can set  DragEdge to change the swipe direction.
     }
 ```
 
+###Child View
+SwipeBackLayout must contains only one direct child.
+
+Such as:
+
+```
+LinearLayout,
+RelativeLayout,
+ListView,
+ViewPager
+```
