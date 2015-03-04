@@ -3,27 +3,35 @@ package com.liuguangqiang.swipeback;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 
 /**
  * Created by Eric on 15/3/3.
  */
-public class SwipeBackActivity extends ActionBarActivity {
+public class SwipeBackActivity extends ActionBarActivity implements SwipeBackLayout.SwipeBackListener {
 
-     SwipeBackLayout swipeBackLayout;
+    private SwipeBackLayout swipeBackLayout;
+    private ImageView ivShadow;
 
     @Override
     public void setContentView(int layoutResID) {
-        swipeBackLayout = new SwipeBackLayout(this);
+        super.setContentView(getContainer());
         View view = LayoutInflater.from(this).inflate(layoutResID, null);
         swipeBackLayout.addView(view);
-
-
-
-        super.setContentView(swipeBackLayout);
     }
 
-    private void initContent(){
-
+    private View getContainer() {
+        RelativeLayout container = new RelativeLayout(this);
+        swipeBackLayout = new SwipeBackLayout(this);
+        swipeBackLayout.setOnSwipeBackListener(this);
+        ivShadow = new ImageView(this);
+        ivShadow.setBackgroundColor(getResources().getColor(R.color.black_p50));
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        container.addView(ivShadow, params);
+        container.addView(swipeBackLayout);
+        return container;
     }
 
     public void setDragEdge(SwipeBackLayout.DragEdge dragEdge) {
@@ -32,6 +40,11 @@ public class SwipeBackActivity extends ActionBarActivity {
 
     public SwipeBackLayout getSwipeBackLayout() {
         return swipeBackLayout;
+    }
+
+    @Override
+    public void onViewPositionChanged(float fractionAnchor, float fractionScreen) {
+        ivShadow.setAlpha(1 - fractionScreen);
     }
 
 }
