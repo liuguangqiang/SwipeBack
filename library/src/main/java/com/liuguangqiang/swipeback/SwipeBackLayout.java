@@ -61,7 +61,6 @@ public class SwipeBackLayout extends ViewGroup {
         this.dragEdge = dragEdge;
     }
 
-    public static int BACK_FACTOR = 3;
 
     private static final double AUTO_FINISHED_SPEED_LIMIT = 2000.0;
 
@@ -70,10 +69,6 @@ public class SwipeBackLayout extends ViewGroup {
     private View target;
 
     private View scrollChild;
-
-    public void setScrollChild(View view) {
-        scrollChild = view;
-    }
 
     private int verticalDragRange = 0;
 
@@ -88,18 +83,26 @@ public class SwipeBackLayout extends ViewGroup {
      */
     private boolean enablePullToBack = true;
 
+    private static final float BACK_FACTOR = 0.5f;
+
     /**
      * the anchor of calling finish.
      */
-    private int finishAnchor = 0;
+    private float finishAnchor = 0;
 
     /**
-     * Whether allow to finish activty on fling the layout.
+     * Set the anchor of calling finish.
+     *
+     * @param offset
      */
+    public void setFinishAnchor(float offset) {
+        finishAnchor = offset;
+    }
+
     private boolean enableFlingBack = true;
 
     /**
-     * Whether allow to finish activty on fling the layout.
+     * Whether allow to finish activity by fling the layout.
      *
      * @param b
      */
@@ -109,7 +112,12 @@ public class SwipeBackLayout extends ViewGroup {
 
     private SwipeBackListener swipeBackListener;
 
+    @Deprecated
     public void setOnPullToBackListener(SwipeBackListener listener) {
+        swipeBackListener = listener;
+    }
+
+    public void setOnSwipeBackListener(SwipeBackListener listener) {
         swipeBackListener = listener;
     }
 
@@ -121,6 +129,10 @@ public class SwipeBackLayout extends ViewGroup {
         super(context, attrs);
 
         viewDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelperCallBack());
+    }
+
+    public void setScrollChild(View view) {
+        scrollChild = view;
     }
 
     public void setEnablePullToBack(boolean b) {
@@ -205,11 +217,11 @@ public class SwipeBackLayout extends ViewGroup {
         switch (dragEdge) {
             case TOP:
             case BOTTOM:
-                finishAnchor = verticalDragRange / BACK_FACTOR;
+                finishAnchor = finishAnchor > 0 ? finishAnchor : verticalDragRange * BACK_FACTOR;
                 break;
             case LEFT:
             case RIGHT:
-                finishAnchor = horizontalDragRange / BACK_FACTOR;
+                finishAnchor = finishAnchor > 0 ? finishAnchor : horizontalDragRange * BACK_FACTOR;
                 break;
         }
     }
@@ -345,27 +357,21 @@ public class SwipeBackLayout extends ViewGroup {
 
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-
-            boolean verticalDraging = Math.abs(top) > Math.abs(left);
-            boolean horizontalDraging = Math.abs(left) > Math.abs(top);
-
             switch (dragEdge) {
                 case TOP:
                 case BOTTOM:
-//                    if (verticalDraging)
                     draggingOffset = Math.abs(top);
                     break;
                 case LEFT:
                 case RIGHT:
-//                    if (horizontalDraging)
                     draggingOffset = Math.abs(left);
                     break;
                 default:
                     break;
             }
 
-            //滑动距离到退出锚点的比例。
-            float fractionAnchor = (float) draggingOffset / (float) finishAnchor;
+            //The proportion of the sliding.
+            float fractionAnchor = (float) draggingOffset / finishAnchor;
             if (fractionAnchor >= 1) fractionAnchor = 1;
 
             float fractionScreen = (float) draggingOffset / (float) getDragRange();
@@ -417,18 +423,6 @@ public class SwipeBackLayout extends ViewGroup {
     }
 
     private boolean backBySpeed(float xvel, float yvel) {
-//        boolean isBack = false;
-//        if (dragEdge == DragEdge.TOP && Math.abs(yvel) > Math.abs(xvel)) {
-//            if (yvel > AUTO_FINISHED_SPEED_LIMIT) {
-//                isBack = !canChildScrollUp();
-//            }
-//        } else if (dragEdge == DragEdge.LEFT && Math.abs(xvel) > Math.abs(yvel)) {
-//            if (xvel > AUTO_FINISHED_SPEED_LIMIT) {
-//                isBack = !canChildScrollUp();
-//            }
-//        }
-
-
         switch (dragEdge) {
             case TOP:
             case BOTTOM:
@@ -444,7 +438,6 @@ public class SwipeBackLayout extends ViewGroup {
                 break;
         }
         return false;
-//        return isBack;
     }
 
     private void smoothScrollToX(int finalLeft) {
@@ -464,7 +457,7 @@ public class SwipeBackLayout extends ViewGroup {
         /**
          * Return scrolled fraction of the layout.
          *
-         * @param fractionAnchor relative to finished anchor.
+         * @param fractionAnchor relative to the anchor.
          * @param fractionScreen relative to the screen.
          */
         public void onViewPositionChanged(float fractionAnchor, float fractionScreen);
