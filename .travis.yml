@@ -10,9 +10,11 @@ android:
     - extra-android-support
 
 script:
-  - ./library/gradlew clean
+  ./gradlew clean
 
 notifications:
   email: false
 
 sudo: false
+
+./gradlew build connectedCheck
