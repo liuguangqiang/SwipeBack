@@ -1,20 +1,12 @@
 language: android
 
-jdk:
- - oraclejdk7
-
 android:
   components:
-    - build-tools-22.0.1
-    - android-22
-    - extra-android-support
+    - platform-tools
+    - tools
 
-script:
-  ./gradlew clean
-
-notifications:
-  email: false
-
-sudo: false
-
-./gradlew build connectedCheck
+    - build-tools-21.1.1
+    - android-21
+    
+    
+script: ./gradlew build
