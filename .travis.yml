@@ -2,7 +2,6 @@ language: android
 
 jdk:
  - oraclejdk7
- - oraclejdk8
 
 android:
   components:
@@ -11,17 +10,9 @@ android:
     - extra-android-support
 
 script:
-  - ./library/gradlew clean build
-
-branches:
-  except:
-    - gh-pages
+  - ./library/gradlew clean
 
 notifications:
   email: false
 
 sudo: false
-
-cache:
-  directories:
-    - $HOME/.gradle
