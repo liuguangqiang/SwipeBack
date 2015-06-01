@@ -20,7 +20,7 @@ You can set the swipe direction,such as left,top,right and bottom.
 ###Gradle
 ```
 dependencies {
-   	compile 'com.github.liuguangqiang.swipeback:library:1.0.1@aar'
+   	compile 'com.github.liuguangqiang.swipeback:library:1.0.2@aar'
 }
 ```
 
@@ -29,7 +29,7 @@ dependencies {
 <dependency>
   	<groupId>com.github.liuguangqiang.swipeback</groupId>
   	<artifactId>library</artifactId>
-  	<version>1.0.1</version>
+  	<version>1.0.2</version>
   	<type>aar</type>
 </dependency>
 ```
@@ -90,17 +90,16 @@ You can set  DragEdge to change the swipe direction.
     }
 ```
 
-###Child View
+###Support Views
 SwipeBackLayout must contains only one direct child.
 
 Such as:
 
-```
-LinearLayout,
-RelativeLayout,
-ListView,
-ViewPager
-```
+* LinearLayout,
+* RelativeLayout,
+* ListView,
+* ViewPager
+* WebView
 
 ## License
 
