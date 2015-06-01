@@ -4,8 +4,10 @@
     <string name="app_name">SwipeBack</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
     <string name="title_activity_common">CommonActivity</string>
     <string name="title_activity_list_view">ListViewActivity</string>
     <string name="title_activity_viewpager">ViewPagerActivity</string>
+    <string name="title_activity_webview">WebViewActivity</string>
 
 </resources>

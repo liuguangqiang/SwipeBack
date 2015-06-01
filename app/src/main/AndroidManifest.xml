@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.liuguangqiang.swiplebacksample">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -27,11 +30,15 @@
         <activity
             android:name=".ListViewActivity"
             android:label="@string/title_activity_list_view"
-            android:theme="@style/Theme.Swipe.Back"></activity>
+            android:theme="@style/Theme.Swipe.Back" />
         <activity
             android:name=".ViewPagerActivity"
             android:label="@string/title_activity_viewpager"
-            android:theme="@style/Theme.Swipe.Back"></activity>
+            android:theme="@style/Theme.Swipe.Back" />
+        <activity
+            android:name=".WebViewActivity"
+            android:label="@string/title_activity_webview"
+            android:theme="@style/Theme.Swipe.Back" />
     </application>
 
 </manifest>
