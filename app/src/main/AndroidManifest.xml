@@ -36,8 +36,8 @@
             android:label="@string/title_activity_viewpager"
             android:theme="@style/Theme.Swipe.Back" />
         <activity
-            android:name=".WebViewActivity"
-            android:label="@string/title_activity_common"
+            android:name=".WebViewActivity1"
+            android:label="@string/title_activity_viewpager"
             android:theme="@style/Theme.Swipe.Back" />
     </application>
 
