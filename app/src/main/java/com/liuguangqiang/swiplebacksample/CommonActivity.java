@@ -12,6 +12,7 @@ public class CommonActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common);
         setDragEdge(SwipeBackLayout.DragEdge.LEFT);
+        setTitle("Common");
     }
 
 }
