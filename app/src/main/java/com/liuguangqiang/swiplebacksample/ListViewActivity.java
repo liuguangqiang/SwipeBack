@@ -10,13 +10,14 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.liuguangqiang.swipeback.SwipeBackActivity;
 import com.liuguangqiang.swipeback.SwipeBackLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ListViewActivity extends ActionBarActivity {
+public class ListViewActivity extends SwipeBackActivity {
 
     private ListView lv;
 

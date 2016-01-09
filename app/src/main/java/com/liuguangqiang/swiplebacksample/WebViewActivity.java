@@ -11,7 +11,7 @@ import com.liuguangqiang.swipeback.SwipeBackLayout;
 /**
  * Created by Eric on 15/6/1.
  */
-public class WebViewActivity1 extends SwipeBackActivity {
+public class WebViewActivity extends SwipeBackActivity {
 
     private WebView webView;
 

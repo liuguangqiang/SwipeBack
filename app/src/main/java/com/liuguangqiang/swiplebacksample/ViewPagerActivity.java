@@ -6,13 +6,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.liuguangqiang.swipeback.SwipeBackActivity;
 import com.liuguangqiang.swipeback.SwipeBackLayout;
 import com.liuguangqiang.swiplebacksample.adapter.TestAdapter;
 
 /**
  * Created by Eric on 15/2/27.
  */
-public class ViewPagerActivity extends ActionBarActivity {
+public class ViewPagerActivity extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

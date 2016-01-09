@@ -1,6 +1,8 @@
 package com.liuguangqiang.swiplebacksample;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.liuguangqiang.swipeback.SwipeBackActivity;
 import com.liuguangqiang.swipeback.SwipeBackLayout;
@@ -13,6 +15,10 @@ public class CommonActivity extends SwipeBackActivity {
         setContentView(R.layout.activity_common);
         setDragEdge(SwipeBackLayout.DragEdge.LEFT);
         setTitle("Common");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolbar);
     }
 
 }

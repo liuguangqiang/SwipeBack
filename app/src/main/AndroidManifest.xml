@@ -26,19 +26,19 @@
         <activity
             android:name=".CommonActivity"
             android:label="@string/title_activity_common"
-            android:theme="@style/Theme.Swipe.Back" />
+            android:theme="@style/ThemeSwipeBack" />
         <activity
             android:name=".ListViewActivity"
             android:label="@string/title_activity_list_view"
-            android:theme="@style/Theme.Swipe.Back" />
+            android:theme="@style/ThemeSwipeBack" />
         <activity
             android:name=".ViewPagerActivity"
             android:label="@string/title_activity_viewpager"
-            android:theme="@style/Theme.Swipe.Back" />
+            android:theme="@style/ThemeSwipeBack" />
         <activity
-            android:name=".WebViewActivity1"
+            android:name=".WebViewActivity"
             android:label="@string/title_activity_viewpager"
-            android:theme="@style/Theme.Swipe.Back" />
+            android:theme="@style/ThemeSwipeBack" />
     </application>
 
 </manifest>
