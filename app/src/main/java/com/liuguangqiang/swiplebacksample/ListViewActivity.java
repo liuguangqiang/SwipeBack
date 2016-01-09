@@ -1,7 +1,6 @@
 package com.liuguangqiang.swiplebacksample;
 
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -23,8 +22,6 @@ public class ListViewActivity extends SwipeBackActivity {
 
     private List<HashMap<String, String>> data;
 
-    private SwipeBackLayout swipeBackLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,21 +34,20 @@ public class ListViewActivity extends SwipeBackActivity {
 
         initData();
         initView();
+        setDragEdge(SwipeBackLayout.DragEdge.TOP);
     }
 
     private void initData() {
         data = new ArrayList<>();
+        HashMap<String, String> map;
         for (int i = 0; i < 30; i++) {
-            HashMap<String, String> map = new HashMap<String, String>();
+            map = new HashMap<>();
             map.put("title", "Test" + i);
             data.add(map);
         }
     }
 
     private void initView() {
-        swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
-        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.TOP);
-
         SimpleAdapter adapter = new SimpleAdapter(getApplicationContext(),
                 data, R.layout.item_test, new String[]{"title"},
                 new int[]{R.id.tv_test});

@@ -20,6 +20,7 @@ public class ViewPagerActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpager);
         initViews();
+        setDragEdge(SwipeBackLayout.DragEdge.LEFT);
     }
 
     private void initViews() {
@@ -27,9 +28,6 @@ public class ViewPagerActivity extends SwipeBackActivity {
         toolbar.setTitle(R.string.title_activity_viewpager);
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
-
-        SwipeBackLayout swipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
-        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager_demo);
         TestAdapter adapter = new TestAdapter(getSupportFragmentManager());

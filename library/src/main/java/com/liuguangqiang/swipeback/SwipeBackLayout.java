@@ -461,7 +461,7 @@ public class SwipeBackLayout extends ViewGroup {
          * @param fractionAnchor relative to the anchor.
          * @param fractionScreen relative to the screen.
          */
-        public void onViewPositionChanged(float fractionAnchor, float fractionScreen);
+        void onViewPositionChanged(float fractionAnchor, float fractionScreen);
 
     }
 
