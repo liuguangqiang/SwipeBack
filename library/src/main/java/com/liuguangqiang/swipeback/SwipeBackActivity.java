@@ -1,6 +1,7 @@
 package com.liuguangqiang.swipeback;
 
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,7 +11,7 @@ import android.widget.RelativeLayout.LayoutParams;
 /**
  * Created by Eric on 15/3/3.
  */
-public class SwipeBackActivity extends ActionBarActivity implements SwipeBackLayout.SwipeBackListener {
+public class SwipeBackActivity extends AppCompatActivity implements SwipeBackLayout.SwipeBackListener {
 
     private SwipeBackLayout swipeBackLayout;
     private ImageView ivShadow;
