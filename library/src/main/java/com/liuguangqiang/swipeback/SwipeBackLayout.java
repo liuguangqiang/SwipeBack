@@ -274,11 +274,11 @@ public class SwipeBackLayout extends ViewGroup {
     }
 
     private boolean canChildScrollRight() {
-        return ViewCompat.canScrollHorizontally(scrollChild, -1);
+        return ViewCompat.canScrollHorizontally(scrollChild, 1);
     }
 
     private boolean canChildScrollLeft() {
-        return ViewCompat.canScrollHorizontally(scrollChild, 1);
+        return ViewCompat.canScrollHorizontally(scrollChild, -1);
     }
 
     private void finish() {
@@ -327,11 +327,11 @@ public class SwipeBackLayout extends ViewGroup {
 
             int result = 0;
 
-            if (dragEdge == DragEdge.LEFT && !canChildScrollRight() && left > 0) {
+            if (dragEdge == DragEdge.LEFT && !canChildScrollLeft() && left > 0) {
                 final int leftBound = getPaddingLeft();
                 final int rightBound = horizontalDragRange;
                 result = Math.min(Math.max(left, leftBound), rightBound);
-            } else if (dragEdge == DragEdge.RIGHT && !canChildScrollLeft() && left < 0) {
+            } else if (dragEdge == DragEdge.RIGHT && !canChildScrollRight() && left < 0) {
                 final int leftBound = -horizontalDragRange;
                 final int rightBound = getPaddingLeft();
                 result = Math.min(Math.max(left, leftBound), rightBound);
