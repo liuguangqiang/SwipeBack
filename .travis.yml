@@ -1,11 +1,11 @@
 language: android
+jdk: oraclejdk8
+sudo: false
 
 android:
   components:
-    - oraclejdk8
-    - tools
-    - tools
     - platform-tools
+    - tools
     - extra-android-m2repository
     - build-tools-25.0.0
     - android-25
@@ -13,4 +13,4 @@ android:
 notifications:
   email: false
   
-script: ./gradlew build connectedCheck
+script: gradle build
