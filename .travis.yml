@@ -1,6 +1,9 @@
 language: android
 jdk: oraclejdk8
-sudo: false
+sudo: required
+
+before_install:
+    #- chmod +x gradlew
 
 android:
   components:
@@ -13,4 +16,4 @@ android:
 notifications:
   email: false
   
-script: gradle build
+script: ./gradlew build
