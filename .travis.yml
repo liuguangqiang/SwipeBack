@@ -2,13 +2,15 @@ language: android
 
 android:
   components:
-    - platform-tools
+    - oraclejdk8
     - tools
-
+    - tools
+    - platform-tools
+    - extra-android-m2repository
     - build-tools-25.0.0
     - android-25
     
 notifications:
   email: false
   
-script: ./gradlew build
+script: ./gradlew build connectedCheck
