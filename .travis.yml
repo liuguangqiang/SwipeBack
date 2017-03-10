@@ -5,8 +5,8 @@ android:
     - platform-tools
     - tools
 
-    - build-tools-21.1.1
-    - android-21
+    - build-tools-25.0.0
+    - android-25
     
 notifications:
   email: false
