@@ -3,7 +3,7 @@ jdk: oraclejdk8
 sudo: required
 
 before_install:
-    #- chmod +x gradlew
+    - chmod +x gradlew
 
 android:
   components:

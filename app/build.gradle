@@ -4,6 +4,10 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
 
+    lintOptions {
+        abortOnError false
+    }
+
     defaultConfig {
         applicationId "com.liuguangqiang.swiplebacksample"
         minSdkVersion 14
