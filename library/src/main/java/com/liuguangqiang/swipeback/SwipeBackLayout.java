@@ -22,6 +22,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,6 @@ public class SwipeBackLayout extends ViewGroup {
     public void setDragEdge(DragEdge dragEdge) {
         this.dragEdge = dragEdge;
     }
-
 
     private static final double AUTO_FINISHED_SPEED_LIMIT = 2000.0;
 
@@ -130,6 +130,49 @@ public class SwipeBackLayout extends ViewGroup {
         super(context, attrs);
 
         viewDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelperCallBack());
+        chkDragable();
+    }
+
+    float lastY = 0;
+    float newY = 0;
+    float offsetY = 0;
+
+    float lastX = 0;
+    float newX = 0;
+    float offsetX = 0;
+
+    private void chkDragable() {
+        setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    lastY = motionEvent.getRawY();
+                    lastX = motionEvent.getRawX();
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                    newY = motionEvent.getRawY();
+                    lastX = motionEvent.getRawX();
+
+                    offsetY = Math.abs(newY - lastY);
+                    lastY = newY;
+
+                    offsetX = Math.abs(newX - lastX);
+                    lastX = newX;
+
+                    switch (dragEdge) {
+                        case TOP:
+                        case BOTTOM:
+                            setEnablePullToBack(offsetY > offsetX);
+                        case LEFT:
+                        case RIGHT:
+                            setEnablePullToBack(offsetY < offsetX);
+                            break;
+                    }
+                }
+
+                return false;
+            }
+        });
     }
 
     public void setScrollChild(View view) {
@@ -138,6 +181,7 @@ public class SwipeBackLayout extends ViewGroup {
 
     public void setEnablePullToBack(boolean b) {
         enablePullToBack = b;
+        Log.i(TAG, "enablePullToBack:" + enablePullToBack);
     }
 
     private void ensureTarget() {
@@ -354,7 +398,6 @@ public class SwipeBackLayout extends ViewGroup {
 
             draggingState = state;
         }
-
 
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {

@@ -3,6 +3,8 @@ package com.liuguangqiang.swiplebacksample;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -34,7 +36,7 @@ public class ListViewActivity extends SwipeBackActivity {
 
         initData();
         initView();
-        setDragEdge(SwipeBackLayout.DragEdge.TOP);
+        setDragEdge(SwipeBackLayout.DragEdge.LEFT);
     }
 
     private void initData() {
@@ -46,6 +48,14 @@ public class ListViewActivity extends SwipeBackActivity {
             data.add(map);
         }
     }
+
+    float lastY = 0;
+    float newY = 0;
+    float offsetY = 0;
+
+    float lastX = 0;
+    float newX = 0;
+    float offsetX = 0;
 
     private void initView() {
         SimpleAdapter adapter = new SimpleAdapter(getApplicationContext(),
@@ -63,6 +73,32 @@ public class ListViewActivity extends SwipeBackActivity {
                         .show();
             }
         });
+
+//        lv.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//
+//                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+//                    lastY = motionEvent.getRawY();
+//                    lastX = motionEvent.getRawX();
+//                } else if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+//                    newY = motionEvent.getRawY();
+//                    lastX = motionEvent.getRawX();
+//
+//                    offsetY = Math.abs(newY - lastY);
+//                    lastY = newY;
+//
+//                    offsetX = Math.abs(newX - lastX);
+//                    lastX = newX;
+//
+//                    getSwipeBackLayout().setEnablePullToBack(offsetY < offsetX);
+//                }
+//
+//                return false;
+//            }
+//        });
+
+
     }
 
 }
