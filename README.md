@@ -5,26 +5,26 @@ SwipeBack is a android library that can finish a activity by using gesture.
 
 You can set the swipe direction,such as left,top,right and bottom.
 
-##Screenshots
+## Screenshots
 ![image](Images/swipeback_demo.gif)
 
 ![image](Images/swipeback.gif)
 
-##Sample Download
+## Sample Download
 [Sample Download](https://github.com/liuguangqiang/SwipeBack/raw/master/Images/apks/swipe_back_demo_v1.0.apk)
 
 ![image](Images/download.png)
 
-##Usage
+## Usage
 
-###Gradle
+### Gradle
 ```
 dependencies {
    	compile 'com.github.liuguangqiang.swipeback:library:1.0.2@aar'
 }
 ```
 
-###Maven
+### Maven
 ```
 <dependency>
   	<groupId>com.github.liuguangqiang.swipeback</groupId>
@@ -33,7 +33,7 @@ dependencies {
   	<type>aar</type>
 </dependency>
 ```
-###SwipeBackActivity
+### SwipeBackActivity
 SwipeBackActivity is a base activity for using this library more easier.This Activity will help us to show a shadow.
 
 ![image](Images/swipe_back_activity.gif)
@@ -51,7 +51,7 @@ public class CommonActivity extends SwipeBackActivity {
 }
 ```
 
-###Layout and activity theme.
+### Layout and activity theme.
 SwipeBackLayout must contains only one direct child.
 
 ```
@@ -75,7 +75,7 @@ SwipeBackLayout must contains only one direct child.
  </style>
 ```
 
-###Swipe Direction
+### Swipe Direction
 You can set  DragEdge to change the swipe direction.
 
 ```
@@ -90,7 +90,7 @@ You can set  DragEdge to change the swipe direction.
     }
 ```
 
-###Support Views
+### Support Views
 SwipeBackLayout must contains only one direct child.
 
 Such as:
