@@ -47,6 +47,12 @@ public class SwipeBackLayout extends ViewGroup {
 
     private static final String TAG = "SwipeBackLayout";
 
+    public enum DragDirectMode {
+        EDGE,
+        VERTICAL,
+        HORIZONTAL
+    }
+
     public enum DragEdge {
         LEFT,
 
@@ -57,10 +63,21 @@ public class SwipeBackLayout extends ViewGroup {
         BOTTOM
     }
 
+    private DragDirectMode dragDirectMode = DragDirectMode.EDGE;
+
     private DragEdge dragEdge = DragEdge.TOP;
 
     public void setDragEdge(DragEdge dragEdge) {
         this.dragEdge = dragEdge;
+    }
+
+    public void setDragDirectMode(DragDirectMode dragDirectMode) {
+        this.dragDirectMode = dragDirectMode;
+        if (dragDirectMode == DragDirectMode.VERTICAL) {
+            this.dragEdge = DragEdge.TOP;
+        } else if (dragDirectMode == DragDirectMode.HORIZONTAL) {
+            this.dragEdge = DragEdge.LEFT;
+        }
     }
 
     private static final double AUTO_FINISHED_SPEED_LIMIT = 2000.0;
@@ -353,6 +370,14 @@ public class SwipeBackLayout extends ViewGroup {
 
             int result = 0;
 
+            if (dragDirectMode == DragDirectMode.VERTICAL) {
+                if (!canChildScrollUp() && top > 0) {
+                    dragEdge = DragEdge.TOP;
+                } else if (!canChildScrollDown() && top < 0) {
+                    dragEdge = DragEdge.BOTTOM;
+                }
+            }
+
             if (dragEdge == DragEdge.TOP && !canChildScrollUp() && top > 0) {
                 final int topBound = getPaddingTop();
                 final int bottomBound = verticalDragRange;
@@ -370,6 +395,14 @@ public class SwipeBackLayout extends ViewGroup {
         public int clampViewPositionHorizontal(View child, int left, int dx) {
 
             int result = 0;
+
+            if (dragDirectMode == DragDirectMode.HORIZONTAL) {
+                if (!canChildScrollRight() && left > 0) {
+                    dragEdge = DragEdge.LEFT;
+                } else if (!canChildScrollLeft() && left < 0) {
+                    dragEdge = DragEdge.RIGHT;
+                }
+            }
 
             if (dragEdge == DragEdge.LEFT && !canChildScrollRight() && left > 0) {
                 final int leftBound = getPaddingLeft();

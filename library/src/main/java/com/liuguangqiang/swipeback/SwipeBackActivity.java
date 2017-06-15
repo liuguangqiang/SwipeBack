@@ -1,15 +1,8 @@
 package com.liuguangqiang.swipeback;
 
-import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -50,6 +43,10 @@ public class SwipeBackActivity extends AppCompatActivity implements SwipeBackLay
 
     public void setDragEdge(SwipeBackLayout.DragEdge dragEdge) {
         swipeBackLayout.setDragEdge(dragEdge);
+    }
+
+    public void setDragDirectMode(SwipeBackLayout.DragDirectMode dragDirectMode) {
+        swipeBackLayout.setDragDirectMode(dragDirectMode);
     }
 
     public SwipeBackLayout getSwipeBackLayout() {
