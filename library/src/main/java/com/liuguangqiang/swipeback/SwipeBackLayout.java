@@ -150,6 +150,11 @@ public class SwipeBackLayout extends ViewGroup {
         chkDragable();
     }
 
+    /**
+     * This should be added first than any other setting, because it will overwrite the viewDragHelper
+     *
+     * @param onFinishListener listener for what to do when view reach the end
+     */
     public void setOnFinishListener(OnFinishListener onFinishListener ) {
         viewDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelperCallBack(onFinishListener));
     }
