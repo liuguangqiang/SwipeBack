@@ -53,6 +53,10 @@ public class SwipeBackActivity extends AppCompatActivity implements SwipeBackLay
         return swipeBackLayout;
     }
 
+    public void setOnFinishListener(SwipeBackLayout.OnFinishListener onFinishListener){
+        swipeBackLayout.setOnFinishListener(onFinishListener);
+    }
+
     @Override
     public void onViewPositionChanged(float fractionAnchor, float fractionScreen) {
         ivShadow.setAlpha(1 - fractionScreen);

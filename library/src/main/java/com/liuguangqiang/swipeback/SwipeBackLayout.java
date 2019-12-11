@@ -82,7 +82,7 @@ public class SwipeBackLayout extends ViewGroup {
 
     private static final double AUTO_FINISHED_SPEED_LIMIT = 2000.0;
 
-    private final ViewDragHelper viewDragHelper;
+    private ViewDragHelper viewDragHelper;
 
     private View target;
 
@@ -148,6 +148,15 @@ public class SwipeBackLayout extends ViewGroup {
 
         viewDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelperCallBack());
         chkDragable();
+    }
+
+    /**
+     * This should be added first than any other setting, because it will overwrite the viewDragHelper
+     *
+     * @param onFinishListener listener for what to do when view reach the end
+     */
+    public void setOnFinishListener(OnFinishListener onFinishListener ) {
+        viewDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelperCallBack(onFinishListener));
     }
 
     float lastY = 0;
@@ -350,6 +359,20 @@ public class SwipeBackLayout extends ViewGroup {
 
     private class ViewDragHelperCallBack extends ViewDragHelper.Callback {
 
+        private OnFinishListener onFinishListener = new OnFinishListener() {
+            @Override
+            public void onFinishState() {
+                finish();
+            }
+        };
+
+        public ViewDragHelperCallBack() {
+        }
+
+        public ViewDragHelperCallBack(OnFinishListener onFinishListener) {
+            this.onFinishListener = onFinishListener;
+        }
+
         @Override
         public boolean tryCaptureView(View child, int pointerId) {
             return child == target && enablePullToBack;
@@ -425,7 +448,7 @@ public class SwipeBackLayout extends ViewGroup {
                     state == ViewDragHelper.STATE_IDLE) {
                 // the view stopped from moving.
                 if (draggingOffset == getDragRange()) {
-                    finish();
+                    onFinishListener.onFinishState();
                 }
             }
 
@@ -527,6 +550,11 @@ public class SwipeBackLayout extends ViewGroup {
         if (viewDragHelper.settleCapturedViewAt(0, finalTop)) {
             ViewCompat.postInvalidateOnAnimation(SwipeBackLayout.this);
         }
+    }
+
+    public interface OnFinishListener {
+
+        void onFinishState();
     }
 
     public interface SwipeBackListener {
